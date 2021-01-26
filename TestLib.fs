@@ -62,7 +62,6 @@ let markMCQ correct q qStr =
 
 
 let markAndTest markIfOk model q qStr arg  =
-    marksSoFar <- Map.add qStr {OutOf=1.; Attained= -1.} marksSoFar
     let ok = model arg = q arg
     mark qStr  (if ok then markIfOk else 0.)
     if not ok then
