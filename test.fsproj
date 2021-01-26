@@ -6,8 +6,8 @@
   <ItemGroup>
     <Compile Include="Program.fs" />
     <Compile Include="TestLib.fs" />
-    <Compile Include="Answers.fs" />
     <Compile Include="Tests.fs" />
+    <Compile Include="Answers.fs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Expecto" Version="9.0.2" />

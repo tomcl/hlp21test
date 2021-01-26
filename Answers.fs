@@ -87,7 +87,10 @@ is the square of the last element of the input list.
 You are not allowed to use list indexing (.[] or List.item) in your answer.
 HINT: consider List.chunkBySize for one solution (there are others)
 *)
-let q6 (lst: int list): int list = [1;2]
-    // let listodd=
-//         List.length lst %2
+let q6 (lst: int list): int list =
+    match lst.Length with
+    | n when n % 2 = 0 -> 
+        List.init (n/2) (fun i -> lst.[2*i] * lst.[2*i+1])
+    | n -> 
+        lst.[0..n-2] @ [lst.[n-1] * lst.[n-1]]
     
