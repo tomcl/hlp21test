@@ -40,8 +40,6 @@ let mark qStr m =
         match Map.tryFind qStr marksSoFar with
         | None -> 
             {OutOf=1.; Attained=m}
-        | Some mRec when mRec.Attained < 0. -> 
-            {mRec with Attained = m}
         | Some mRec ->
             {mRec with Attained = min mRec.Attained m}
         |> (fun mRec -> Map.add qStr mRec marksSoFar)
