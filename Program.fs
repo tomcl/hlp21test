@@ -13,5 +13,5 @@ let main argv =
     printfn "Starting tests of answers in 'answers.fs"
     let defConfig = Expecto.Impl.ExpectoConfig.defaultConfig
     Expecto.Tests.runTestsInAssembly {defConfig with runInParallel = false} [||] |> ignore
-    printMarks TestLib.marksSoFar |> ignore
+    printMarks Tests.marksSoFar |> ignore
     0

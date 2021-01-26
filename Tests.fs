@@ -7,11 +7,9 @@ open Expecto
 
 open FsCheck
 
-type Mark = {OutOf: float; Attained: float}
 
 
-
-let mutable marksSoFar: Map<string,Mark> = Map.empty
+let mutable marksSoFar = TestLib.marksSoFar
 
 let mark qStr m = 
     marksSoFar <- 
