@@ -76,6 +76,7 @@ let q5 (lst: int list): int=
     | (id, cnt)::_ -> 
         let modes = List.takeWhile (fun (x,cnt') -> cnt' = cnt) sorting
         List.map (fun (i,j)-> abs(i)) modes
+        |>List.sort
         |> List.head
     | [] -> failwithf "Keep the compiler smiling"
 
