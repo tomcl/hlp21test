@@ -2,17 +2,11 @@
 
 let print x = printfn "%A" x;x
 
-(* 
+(*
 Q1. How many values does the q1Type type have? int8 is an 8 bit numeric type
 (Q1 is a function that must return the answer)
 *)
-
-type q1Type = 
-    | House of HasRoof: bool * FloorAreaM2: int8
-    | Hovel of HasWalls: bool
-    | Hut of IsBamboo: bool * IsWaterProof: bool
-
-let q1() : int = 3
+let q1() : int = 1
 
 
 (*
@@ -22,7 +16,9 @@ Q2. Property-based testing is - return the most correct answer:
 2 = more able to find unexpected corner cases than unit testing
 (Q2 is a function that must return the correct answer)
 *)
-let q2() : int = 1
+let q2() : int = 2
+
+
 
 (*
 Q3. The Option type is preferable to using Null pointers because
@@ -39,8 +35,10 @@ C = It documents program behaviour
 7 = A & B & C
 (Q3 is a function that must return the correct answer)
 *)
+let q3 (lst: int list) : int list =
+    lst
+    |>List.collect (fun i-> [i;i])
 
-let q3() : int = 5
 
 
 (*
@@ -49,40 +47,10 @@ element is the nth element of lst added on the head of the nth element of lsts.
 You may assume that lst and lsts have the same length.
 Do not used indexes or List.item.
 *)
-let q4  (lsts: 'a list list) (lst: 'a list) : 'a list list =
-    let twolists li2=
-        List.append lst li2
-    let join = 
-        List.map (twolists) lsts
-    let retone i (listin:list)=
-        [listin.Item(i)]
-    let select inputlist=
-        List.mapi (retone) inputlist
-    join
-    |> select
-    // |>print
-
-
-//-----------------DO NOT CHANGE THIS--------------------------------//
-/// function to use when implementing q4 if you have not correctly answered q4
-let q4UsingIndexes (lsts: 'a list list) (lst: 'a list)  =
-    printfn "lst=%A, lsts=%A" lst lsts
-    [0..lst.Length-1]
-    |> List.map (fun i -> lst.[i] :: lsts.[i])
-//--------------------END OF DO NOT CHANGE---------------------------//
-
-
-(*
-Q5. Write a function, using your answer to q4 or (equivalent) q4usingIndexes, that
-implements the transpose of a matrix represented as a list of lists where
-each list represents one row and the ith element of each list the ith column.
-You may assume the matrix is not empty.
-Do not uses indexes or List.item
-HINT: consider List.fold
-*)
-let q5 (lsts: 'a list list) : 'a list list = 
-    failwithf "Not answered"
-    
+let q4 (lsts: int list list) : int =
+    lsts
+    |> List.collect (fun i -> i)
+    |> List.reduce (+)
 
 (*
 Q6. Write a function that takes two ordered integer lists (ordered by increasing values),
@@ -91,18 +59,26 @@ Q6. Write a function that takes two ordered integer lists (ordered by increasing
     You may not use array functions.
     You should consider using a recursive function.
 *)
-let q6 (left: int list) (right: int list): int list =
-    failwithf "Not answered"
-
+let q5 (lst: int list): int=
+    let sorting =
+        lst
+        |> List.groupBy id
+        |> List.map (fun (x,y)-> (x,List.length y))
+        |> List.sortByDescending snd
+    match sorting with
+    | (id, cnt)::_ ->
+        let modes = List.takeWhile (fun (x,cnt') -> cnt' = cnt) sorting
+        List.map (fun (i,j)-> abs(i)) modes
+        |>List.sort
+        |> List.head
+    | [] -> failwithf "Keep the compiler smiling"
 
 (*
 Q7 return the number of sets in setOfSets that el is an element of
 *)
-let q7 (el: int) (setOfSets: int Set Set) =
-    failwithf "Not answered"
-
-(*
-Q8) Given a map and a value, return a Set of all the keys that are mapped to the value.
-*)
-let q8 (map: Map<'a, 'b>) (x: 'b): Set<'a> =
-    failwithf "Not answered"
+let q6 (lst: int list): int list =
+    match lst.Length with
+    | n when n % 2 = 0 ->
+        List.init (n/2) (fun i -> lst.[2*i] * lst.[2*i+1])
+    | n ->
+        lst.[0..n-2] @ [lst.[n-1] * lst.[n-1]]
