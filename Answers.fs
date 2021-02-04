@@ -1,5 +1,7 @@
 ﻿module Answers
 
+let print x = printfn "%A" x;x
+
 (* 
 Q1. How many values does the q1Type type have? int8 is an 8 bit numeric type
 (Q1 is a function that must return the answer)
@@ -10,9 +12,7 @@ type q1Type =
     | Hovel of HasWalls: bool
     | Hut of IsBamboo: bool * IsWaterProof: bool
 
-let q1() : int = failwith "Not answered"
-
-
+let q1() : int = 3
 
 
 (*
@@ -22,7 +22,7 @@ Q2. Property-based testing is - return the most correct answer:
 2 = more able to find unexpected corner cases than unit testing
 (Q2 is a function that must return the correct answer)
 *)
-let q2() : int = failwithf "Not answered"
+let q2() : int = 1
 
 (*
 Q3. The Option type is preferable to using Null pointers because
@@ -40,7 +40,7 @@ C = It documents program behaviour
 (Q3 is a function that must return the correct answer)
 *)
 
-let q3() : int = failwithf "Not answered"
+let q3() : int = 5
 
 
 (*
@@ -50,7 +50,18 @@ You may assume that lst and lsts have the same length.
 Do not used indexes or List.item.
 *)
 let q4  (lsts: 'a list list) (lst: 'a list) : 'a list list =
-    failwithf "Not answered"
+    let twolists li2=
+        List.append lst li2
+    let join = 
+        List.map (twolists) lsts
+    let retone i (listin:list)=
+        [listin.Item(i)]
+    let select inputlist=
+        List.mapi (retone) inputlist
+    join
+    |> select
+    // |>print
+
 
 //-----------------DO NOT CHANGE THIS--------------------------------//
 /// function to use when implementing q4 if you have not correctly answered q4
@@ -82,9 +93,6 @@ Q6. Write a function that takes two ordered integer lists (ordered by increasing
 *)
 let q6 (left: int list) (right: int list): int list =
     failwithf "Not answered"
-
-
-
 
 
 (*
