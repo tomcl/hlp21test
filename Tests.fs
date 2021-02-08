@@ -78,8 +78,6 @@ let tests =
         testBinary Answers.q4 "q4" validQ4Pairs
         testUnary Answers.q5 "q5" validQ5Pairs
         testBinary Answers.q6 "q6" validQ6Pairs
-        testBinary Answers.q7 "q7" validQ7Pairs
-        testBinary Answers.q8 "q8" validQ8Pairs
     ]
 
 
