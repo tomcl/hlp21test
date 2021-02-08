@@ -1,80 +1,100 @@
 ﻿module Answers
 
-(*
-//-------------------------TBL Class Prep Test 1-----------------------------//
-This file contains questions as comments and should be edited so that you 
-replace the failwithf expressions in the definitions of q1-q6 by your answers.
-
-The file can be run in the practicetest1 solution to check the program 
-answers (3-6) with a testbench. The Multiple choice questions (1-2) will be 
-checked to see if you have attempted them and if so the answer checked if  
-it is one of the allowed values.
-
-MCQ questions are not marked by this testbench,
-they will be marked in the submitted code.
-
-When you have completed the test please submit your answers.fs file as specified.
-
-This style of test will be used for the two TBL tests 
-and also for the assessed mid-term test.
-//---------------------------------------------------------------------------//
-*)
-
 (* 
-Q1. How many values does the F# Unit type have?
-0 or 1 are allowed answers
+Q1. How many values does the q1Type type have? int8 is an 8 bit numeric type
 (Q1 is a function that must return the answer)
 *)
-let q1() : int = 1
+
+type q1Type = 
+    | House of HasRoof: bool * FloorAreaM2: int8
+    | Hovel of HasWalls: bool
+    | Hut of IsBamboo: bool * IsWaterProof: bool
+
+let q1() : int = failwith "Not answered"
+
+
 
 
 (*
-Q2. The F# type constructor -> has what associativity?
-0 = left associative
-1 = right associative
-2 = associativity does not apply to type constructors
+Q2. Property-based testing is - return the most correct answer:
+0 = better than unit testing
+1 = more complete than unit testing
+2 = more able to find unexpected corner cases than unit testing
 (Q2 is a function that must return the correct answer)
 *)
-let q2() : int = 1
+let q2() : int = failwithf "Not answered"
+
+(*
+Q3. The Option type is preferable to using Null pointers because
+A = It has a better implementation
+B = It provides type protection
+C = It documents program behaviour
+0 = None of above
+1 = A
+2 = B
+3 = C
+4 = A & B
+5 = A & C
+6 = B & C
+7 = A & B & C
+(Q3 is a function that must return the correct answer)
+*)
+
+let q3() : int = failwithf "Not answered"
+
+
+(*
+Q4. Write a function (see below for signature) that returns a list whose nth
+element is the nth element of lst added on the head of the nth element of lsts.
+You may assume that lst and lsts have the same length.
+Do not used indexes or List.item.
+*)
+let q4  (lsts: 'a list list) (lst: 'a list) : 'a list list =
+    failwithf "Not answered"
+
+//-----------------DO NOT CHANGE THIS--------------------------------//
+/// function to use when implementing q4 if you have not correctly answered q4
+let q4UsingIndexes (lsts: 'a list list) (lst: 'a list)  =
+    printfn "lst=%A, lsts=%A" lst lsts
+    [0..lst.Length-1]
+    |> List.map (fun i -> lst.[i] :: lsts.[i])
+//--------------------END OF DO NOT CHANGE---------------------------//
+
+
+(*
+Q5. Write a function, using your answer to q4 or (equivalent) q4usingIndexes, that
+implements the transpose of a matrix represented as a list of lists where
+each list represents one row and the ith element of each list the ith column.
+You may assume the matrix is not empty.
+Do not uses indexes or List.item
+HINT: consider List.fold
+*)
+let q5 (lsts: 'a list list) : 'a list list = 
+    failwithf "Not answered"
+    
+
+(*
+Q6. Write a function that takes two ordered integer lists (ordered by increasing values),
+    and return one list, which contains the values of both lists, and is also ordered by increasing values.
+    You may only use the List.rev function from the list library, which takes a list and reverses its order.
+    You may not use array functions.
+    You should consider using a recursive function.
+*)
+let q6 (left: int list) (right: int list): int list =
+    failwithf "Not answered"
+
+
 
 
 
 (*
-Q3. The output list is twice the length of the input list. Each input list element occurs in order
-in the output, twice. E.g [1;2;5] -> [1;1;2;2;5;5].
-You are not allowed to use list indexing (.[] or List.item) in your answer.
+Q7 return the number of sets in setOfSets that el is an element of
 *)
-let q3 (lst: int list) : int list =
-    lst
-    |> List.collect (fun i->[i;i])
-
+let q7 (el: int) (setOfSets: int Set Set) =
+    failwithf "Not answered"
 
 (*
-Q4. The output is the sum of all the elements in all the input lists.
-Recursive functions are not allowed in the answer.
+Q8) Given a map and a value, return a Set of all the keys that are mapped to the value.
 *)
-let q4 (lsts: int list list) : int =
-    List.sum (List.collect (id) lsts)
-
-
-(*
-Q5. The output is the mode (element with maximum number of occurences) in the input list.
-Thus [1;2;0;3;2;1;6;6;1] -> 1
-If there is more than modal element the output should be the most positive of all such.
-You may assume there is at least one element in the list.
-HINT: consider List.countBy for one solution (there are others)
-*)
-let q5 (lst: int list): int =
-    List.countBy id lst
-    |> List.maxBy snd
-    |> fst
-
-(* 
-Q6. List elements are numbered from 0.
-Element n in the output list is the product of elements 2n and 2n+1 in the input list
-If the input list has an odd number of elements then the last element of the output list
-is the square of the last element of the input list.
-You are not allowed to use list indexing (.[] or List.item) in your answer.
-HINT: consider List.chunkBySize for one solution (there are others)
-*)
-let q6 (lst: int list): int list = [1;2]
+let q8 (map: Map<'a, 'b>) (x: 'b): Set<'a> =
+    failwithf "Not answered"
