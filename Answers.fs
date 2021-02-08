@@ -25,7 +25,7 @@ Q1. How many values does the F# Unit type have?
 0 or 1 are allowed answers
 (Q1 is a function that must return the answer)
 *)
-let q1() : int = failwithf "Not answered"
+let q1() : int = 1
 
 
 (*
@@ -35,7 +35,7 @@ Q2. The F# type constructor -> has what associativity?
 2 = associativity does not apply to type constructors
 (Q2 is a function that must return the correct answer)
 *)
-let q2() : int = failwithf "Not answered"
+let q2() : int = 1
 
 
 
@@ -44,15 +44,17 @@ Q3. The output list is twice the length of the input list. Each input list eleme
 in the output, twice. E.g [1;2;5] -> [1;1;2;2;5;5].
 You are not allowed to use list indexing (.[] or List.item) in your answer.
 *)
-let q3 (lst: int list) : int list = failwithf "Not answered"
+let q3 (lst: int list) : int list =
+    lst
+    |> List.collect (fun i->[i;i])
 
 
 (*
 Q4. The output is the sum of all the elements in all the input lists.
 Recursive functions are not allowed in the answer.
 *)
-let q4 (lsts: int list list) : int = failwithf "Not answered"
-
+let q4 (lsts: int list list) : int =
+    List.sum (List.collect (id) lsts)
 
 
 (*
@@ -62,8 +64,10 @@ If there is more than modal element the output should be the most positive of al
 You may assume there is at least one element in the list.
 HINT: consider List.countBy for one solution (there are others)
 *)
-let q5 (lst: int list): int = failwithf "Not answered"
-
+let q5 (lst: int list): int =
+    List.countBy id lst
+    |> List.maxBy snd
+    |> fst
 
 (* 
 Q6. List elements are numbered from 0.
@@ -73,5 +77,4 @@ is the square of the last element of the input list.
 You are not allowed to use list indexing (.[] or List.item) in your answer.
 HINT: consider List.chunkBySize for one solution (there are others)
 *)
-let q6 (lst: int list): int list = failwithf "Not answered"
-
+let q6 (lst: int list): int list = [1;2]
