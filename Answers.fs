@@ -10,7 +10,7 @@ type q1Type =
     | Hovel of HasWalls: bool
     | Hut of IsBamboo: bool * IsWaterProof: bool
 
-let q1() : int = failwith "Not answered"
+let q1() : int = 518
 
 
 
@@ -22,7 +22,7 @@ Q2. Property-based testing is - return the most correct answer:
 2 = more able to find unexpected corner cases than unit testing
 (Q2 is a function that must return the correct answer)
 *)
-let q2() : int = failwithf "Not answered"
+let q2() : int = 2
 
 (*
 Q3. The Option type is preferable to using Null pointers because
@@ -40,7 +40,7 @@ C = It documents program behaviour
 (Q3 is a function that must return the correct answer)
 *)
 
-let q3() : int = failwithf "Not answered"
+let q3() : int = 6
 
 
 (*
@@ -50,7 +50,17 @@ You may assume that lst and lsts have the same length.
 Do not used indexes or List.item.
 *)
 let q4  (lsts: 'a list list) (lst: 'a list) : 'a list list =
-    failwithf "Not answered"
+    let nth (indx:int) (listin)=
+        let returnel indx2 findli=
+            if indx2 = indx
+            then [findli]
+            else [0]
+        List.mapi returnel listin
+        |> List.collect (id)
+        |> List.reduce (+)
+    List.map (List.append lst) lsts
+    |> List.mapi nth
+    |> List.map (fun i->[i])
 
 //-----------------DO NOT CHANGE THIS--------------------------------//
 /// function to use when implementing q4 if you have not correctly answered q4
@@ -59,7 +69,6 @@ let q4UsingIndexes (lsts: 'a list list) (lst: 'a list)  =
     [0..lst.Length-1]
     |> List.map (fun i -> lst.[i] :: lsts.[i])
 //--------------------END OF DO NOT CHANGE---------------------------//
-
 
 (*
 Q5. Write a function, using your answer to q4 or (equivalent) q4usingIndexes, that
@@ -81,20 +90,39 @@ Q6. Write a function that takes two ordered integer lists (ordered by increasing
     You should consider using a recursive function.
 *)
 let q6 (left: int list) (right: int list): int list =
-    failwithf "Not answered"
-
-
-
-
+    let rec order l r=
+        match l,r with
+        | hdl::tll,hdr::tlr when hdl<hdr -> hdl::(order tll r)
+        | hdl::tll,hdr::tlr when hdl>hdr -> hdr::(order l tlr)
+        | [],hdr::tlr -> hdr::(order [] tlr)
+        | hdl::tll,[] -> hdl::(order tll []) 
+        | [],hdr -> hdr
+        | hdl,[] -> hdl 
+        | [],[] -> [] 
+        |_-> failwithf "hehe"
+    order left right
+    // |> List.rev
 
 (*
 Q7 return the number of sets in setOfSets that el is an element of
 *)
 let q7 (el: int) (setOfSets: int Set Set) =
-    failwithf "Not answered"
+    let present st=
+        Set.contains el st
+        |> function
+           | true -> 1
+           | false -> 0
+    Set.map present setOfSets
+    |> Set.fold (+) 0
+    // Set.filter (fun x-> x=el) setOfSets
+    
 
 (*
 Q8) Given a map and a value, return a Set of all the keys that are mapped to the value.
 *)
 let q8 (map: Map<'a, 'b>) (x: 'b): Set<'a> =
-    failwithf "Not answered"
+    Map.toList map
+    // |> List.map (fun (a,b)-> if b=x then a)
+    |> List.filter (fun (a,b)-> b=x) 
+    |> List.map (fun (a,b)-> a)
+    |> Set.ofList
